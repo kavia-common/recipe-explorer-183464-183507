@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import { RecipesProvider } from './context/RecipesContext';
 import { UIProvider } from './context/UIContext';
@@ -12,51 +12,66 @@ import RecipeDetailPage from './pages/RecipeDetailPage';
  * PUBLIC_INTERFACE
  * App - Root component that sets up providers, routing, and the app shell.
  * Includes ErrorBoundary to catch render errors.
+ *
+ * Routes:
+ * - "/" (default): Pixel-locked Sign In screen via iframe, full-bleed without app header/footer.
+ * - "/app": Original recipe UI home (with header/search).
+ * - "/recipe/:id": Recipe details page (kept under app shell).
+ * - "/sign-in": Alias to the pixel-locked Sign In (same as "/").
  */
 function App() {
+  // Helper renderers to isolate the pixel-locked sign-in without the app shell header.
+  const SignInFrame = (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '1rem 0', minHeight: '100vh' }}>
+      <iframe
+        title="Sign In"
+        src="/assets/sign-in-11-235.html"
+        style={{
+          width: 375,
+          height: 812,
+          border: 'none',
+          borderRadius: 0,
+          boxShadow: 'none',
+          background: 'transparent'
+        }}
+      />
+    </div>
+  );
+
+  const AppShell = ({ children }) => (
+    <>
+      <header className="header">
+        <div className="container header-inner">
+          <Header />
+        </div>
+      </header>
+      <main>
+        <div className="container">{children}</div>
+      </main>
+    </>
+  );
+
   return (
     <div className="app-shell">
       <ErrorBoundary>
         <UIProvider>
           <RecipesProvider>
             <BrowserRouter>
-              <header className="header">
-                <div className="container header-inner">
-                  <Header />
-                </div>
-              </header>
-              <main>
-                <div className="container">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/recipe/:id" element={<RecipeDetailPage />} />
-                    {/*
-                      PUBLIC_INTERFACE
-                      Static Sign In page: rendered via iframe to keep HTML/CSS pixel-perfect and isolated.
-                      The /assets folder is served by the dev server as static files from the repository root.
-                    */}
-                    <Route
-                      path="/sign-in"
-                      element={
-                        <div style={{ display: 'flex', justifyContent: 'center', padding: '1rem 0' }}>
-                          <iframe
-                            title="Sign In"
-                            src="/assets/sign-in-11-235.html"
-                            style={{
-                              width: 375,
-                              height: 812,
-                              border: '1px solid rgba(0,0,0,0.08)',
-                              borderRadius: 12,
-                              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                              background: 'white'
-                            }}
-                          />
-                        </div>
-                      }
-                    />
-                  </Routes>
-                </div>
-              </main>
+              <Routes>
+                {/* Default route: pixel-perfect Sign In, no header to avoid style interference */}
+                <Route path="/" element={SignInFrame} />
+                {/* Alias to sign-in */}
+                <Route path="/sign-in" element={<Navigate to="/" replace />} />
+
+                {/* Original app under /app */}
+                <Route path="/app" element={<AppShell><Home /></AppShell>} />
+
+                {/* Keep recipe details under app shell */}
+                <Route path="/recipe/:id" element={<AppShell><RecipeDetailPage /></AppShell>} />
+
+                {/* Legacy root redirect for recipes (optional fallback) */}
+                <Route path="/recipes" element={<Navigate to="/app" replace />} />
+              </Routes>
             </BrowserRouter>
           </RecipesProvider>
         </UIProvider>

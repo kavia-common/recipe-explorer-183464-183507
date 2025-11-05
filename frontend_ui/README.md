@@ -10,7 +10,7 @@ A modern, responsive React app that lets users browse, search, and view detailed
 - Reusable components: Header, RecipeCard, RecipeGrid, RecipeDetail, Tag, Loading/Empty states
 - ErrorBoundary to catch render errors with a friendly message
 - Local mock data layer (no backend required) with seamless future API switch
-- Routing via react-router-dom for `/`, `/recipe/:id`, and `/sign-in`
+- Routing via react-router-dom for `/` (Sign In), `/app` (recipes home), `/recipe/:id` (details)
 - Ocean Professional theme using CSS variables and clean, modern UI
 
 ## Getting Started
@@ -24,12 +24,19 @@ npm start
 
 Open http://localhost:3000 to view it in your browser.
 
+## Navigation
+
+- `/` – Sign In (pixel-perfect Figma screen rendered via iframe; no app header or footer injected)
+- `/app` – Recipe Explorer (original app home with header and search)
+- `/recipe/:id` – Recipe detail page
+- `/sign-in` – Alias that redirects to `/`
+
 ## Sign In Screen (Pixel-Locked)
 
-- Route: `http://localhost:3000/sign-in`
-- This screen is rendered via a static HTML file served from `/assets/sign-in-11-235.html` and embedded in the app using an iframe to ensure pixel-perfect fidelity to Figma.
-- All DOM structure, class names, and CSS variables are preserved as generated. Do not modify `assets/common.css` or `assets/sign-in-11-235.css`.
-- Images are referenced under `assets/figmaimages/` and paths remain unchanged.
+- Served from `/assets/sign-in-11-235.html` inside an iframe to preserve exact DOM/CSS.
+- Do not modify `assets/common.css` or `assets/sign-in-11-235.css`.
+- Assets are served from `/assets` and images remain under `/assets/figmaimages/`.
+- The Sign In route is rendered full-bleed without the app shell header/footer to avoid CSS interference.
 
 ## Environment Variables
 
@@ -71,4 +78,3 @@ setRecipes(data);
 - `npm start` – Start dev server
 - `npm test` – Run tests
 - `npm run build` – Production build
-
