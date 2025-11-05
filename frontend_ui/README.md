@@ -10,7 +10,7 @@ A modern, responsive React app that lets users browse, search, and view detailed
 - Reusable components: Header, RecipeCard, RecipeGrid, RecipeDetail, Tag, Loading/Empty states
 - ErrorBoundary to catch render errors with a friendly message
 - Local mock data layer (no backend required) with seamless future API switch
-- Routing via react-router-dom for `/` and `/recipe/:id`
+- Routing via react-router-dom for `/`, `/recipe/:id`, and `/sign-in`
 - Ocean Professional theme using CSS variables and clean, modern UI
 
 ## Getting Started
@@ -23,6 +23,13 @@ npm start
 ```
 
 Open http://localhost:3000 to view it in your browser.
+
+## Sign In Screen (Pixel-Locked)
+
+- Route: `http://localhost:3000/sign-in`
+- This screen is rendered via a static HTML file served from `/assets/sign-in-11-235.html` and embedded in the app using an iframe to ensure pixel-perfect fidelity to Figma.
+- All DOM structure, class names, and CSS variables are preserved as generated. Do not modify `assets/common.css` or `assets/sign-in-11-235.css`.
+- Images are referenced under `assets/figmaimages/` and paths remain unchanged.
 
 ## Environment Variables
 
@@ -40,6 +47,7 @@ The app uses environment variables for future backend configuration. Copy `.env.
 - `src/pages/` – Route pages: Home and RecipeDetailPage
 - `src/App.js` – Routing and app shell
 - `src/App.css` – Theme and component styles
+- `assets/` – Static, generated Figma assets for the Sign In screen (HTML, CSS, JS, images)
 
 ## Design & Theme
 

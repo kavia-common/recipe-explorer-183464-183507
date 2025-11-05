@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useRecipes } from '../context/RecipesContext';
 
 /**
@@ -14,7 +15,7 @@ function Header() {
         <div className="brand-logo" aria-hidden>🍽️</div>
         <h1 className="brand-title">Recipe Explorer</h1>
       </div>
-      <div className="searchbar" role="search">
+      <div className="searchbar" role="search" style={{ display: 'flex', alignItems: 'center', gap: '.75rem', width: '100%' }}>
         <span className="search-icon" aria-hidden>🔎</span>
         <input
           value={query}
@@ -23,6 +24,10 @@ function Header() {
           className="search-input"
           aria-label="Search recipes"
         />
+        {/* Link to pixel-locked Sign In screen */}
+        <Link to="/sign-in" className="btn secondary" style={{ whiteSpace: 'nowrap' }} aria-label="Go to Sign In">
+          Sign In
+        </Link>
       </div>
     </>
   );
