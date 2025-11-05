@@ -1,8 +1,4 @@
-:root {
-  color-scheme: light;
-}
-
-* { box-sizing: border-box; }
+:root { color-scheme: light; }
 
 html, body, #root { height: 100%; }
 
@@ -10,9 +6,10 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f9fafb;
-  color: #111827;
 }
+
+/* Avoid adding global background/colors here to prevent bleeding into the Sign In iframe.
+   The recipe UI under /app is themed via .app-shell in tokens-app.css. */
 
 a { color: inherit; }
 img { display: block; max-width: 100%; }

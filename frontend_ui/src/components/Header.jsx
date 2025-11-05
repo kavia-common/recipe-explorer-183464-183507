@@ -15,7 +15,7 @@ function Header() {
         <div className="brand-logo" aria-hidden>🍽️</div>
         <h1 className="brand-title">Recipe Explorer</h1>
       </div>
-      <div className="searchbar" role="search" style={{ display: 'flex', alignItems: 'center', gap: '.75rem', width: '100%' }}>
+      <div className="searchbar" role="search">
         <span className="search-icon" aria-hidden>🔎</span>
         <input
           value={query}

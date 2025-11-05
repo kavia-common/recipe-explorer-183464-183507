@@ -1,0 +1,353 @@
+/* Note: common tokens are injected via a <link href="/assets/common.css"> in App.js for the app shell routes. */
+
+/* Scope all recipe UI rules to .app-shell to avoid bleeding into the Sign In iframe route */
+.app-shell {
+  /* Map local semantic tokens to shared common.css values to keep Ocean Professional theme */
+  --primary: var(--color-1976d2);         /* ocean blue */
+  --secondary: var(--color-ff9c00);       /* amber accent */
+  --error: #EF4444;                       /* not defined in common.css; keep as is */
+  --bg: #f9fafb;
+  --surface: var(--color-ffffff);
+  --text: var(--color-121212);
+  --muted: var(--color-808a96);
+
+  /* radii & shadows from shared approximations */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-xs: 8px;
+
+  --shadow-sm: var(--shadow-sm); /* from common.css */
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  /* Typography scale aligned to tokens (using Poppins/size mappings) */
+  --font-family-sans: var(--typo-61-family), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
+  --font-body-size: var(--typo-66-size); /* 14px */
+  --font-body-line: var(--typo-66-line-height); /* 21px */
+  --font-title-size: 18px; /* between 16 and 20 to keep hierarchy */
+  --font-h2-size: 16px;
+  --font-small-size: var(--typo-62-size); /* 11px */
+
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reset/normalize within app shell only */
+.app-shell * { box-sizing: border-box; }
+.app-shell a { color: inherit; text-decoration: none; }
+.app-shell img { display: block; max-width: 100%; }
+.app-shell button { font: inherit; }
+
+/* Layout */
+.app-shell .container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+}
+
+.app-shell .header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 10%, transparent), rgba(255,255,255,0));
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.app-shell .header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
+.app-shell .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-shell .brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--secondary) 15%, transparent));
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-shell .brand-title {
+  margin: 0;
+  font-size: var(--typo-61-size); /* 20px */
+  line-height: var(--typo-61-line-height); /* 30px */
+  letter-spacing: 0.2px;
+  color: var(--typo-61-color);
+}
+
+/* Search */
+.app-shell .searchbar {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.app-shell .search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  background: var(--surface);
+  outline: none;
+  transition: box-shadow .2s, border-color .2s, background-color .2s;
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+}
+.app-shell .search-input::placeholder {
+  color: var(--typo-64-color); /* light neutral from tokens */
+  font-size: var(--font-small-size);
+}
+.app-shell .search-input:focus {
+  border-color: color-mix(in srgb, var(--primary) 65%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent), var(--shadow-sm);
+  background: var(--surface);
+}
+
+.app-shell .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Grid */
+.app-shell .grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px 0 32px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 540px) { .app-shell .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .app-shell .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .app-shell .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Card */
+.app-shell .card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+}
+.app-shell .card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.app-shell .card-media {
+  position: relative;
+  width: 100%;
+  padding-top: 62%;
+  overflow: hidden;
+}
+.app-shell .card-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-shell .card-content {
+  padding: 12px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.app-shell .card-title {
+  margin: 0;
+  font-size: var(--font-title-size);
+  line-height: 1.4;
+  color: var(--typo-61-color);
+}
+
+.app-shell .card-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Meta text */
+.app-shell .meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Badges / Tags */
+.app-shell .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.app-shell .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--primary) 80%, var(--color-130f26) 20%);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.app-shell .badge-amber {
+  background: color-mix(in srgb, var(--secondary) 10%, transparent);
+  border-color: color-mix(in srgb, var(--secondary) 18%, transparent);
+  color: color-mix(in srgb, var(--secondary) 80%, var(--color-130f26) 20%);
+}
+
+/* Detail page */
+.app-shell .detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px 0 32px;
+}
+@media (min-width: 980px) {
+  .app-shell .detail {
+    grid-template-columns: 1.1fr .9fr;
+  }
+}
+.app-shell .detail-hero {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.app-shell .detail-hero img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+.app-shell .detail-body {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+.app-shell .section-title {
+  margin: 4px 0 8px;
+  font-size: var(--font-h2-size);
+  color: var(--text);
+}
+.app-shell .list {
+  margin: 0;
+  padding-left: 16px;
+}
+.app-shell .divider {
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  margin: 16px 0;
+}
+
+/* Helpers */
+.app-shell .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--typo-58-color);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background-color .2s, box-shadow .2s, transform .1s;
+}
+.app-shell .btn:hover {
+  background: color-mix(in srgb, var(--primary) 90%, white 10%);
+}
+.app-shell .btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent), var(--shadow-sm);
+}
+.app-shell .btn:active {
+  transform: translateY(1px);
+}
+.app-shell .btn.secondary {
+  background: var(--secondary);
+  color: var(--color-121212);
+}
+.app-shell .helper {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Empty & Loading */
+.app-shell .state {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--muted);
+}
+.app-shell .spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  animation: tokens-spin 1s linear infinite;
+}
+@keyframes tokens-spin { to { transform: rotate(360deg); } }
+
+/* Error boundary */
+.app-shell .error-outer {
+  padding: 32px 16px;
+}
+.app-shell .error-card {
+  max-width: 840px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid rgba(239,68,68,0.2);
+  color: #7f1d1d;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 16px 16px 20px;
+}
+.app-shell .error-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #991b1b;
+  margin: 0 0 4px;
+  font-size: var(--font-h2-size);
+}
+.app-shell .error-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}

@@ -38,6 +38,16 @@ Open http://localhost:3000 to view it in your browser.
 - Assets are served from `/assets` and images remain under `/assets/figmaimages/`.
 - The Sign In route is rendered full-bleed without the app shell header/footer to avoid CSS interference.
 
+## Shared Design Tokens (New)
+
+The recipe UI now consumes shared tokens from `assets/common.css`. These tokens are applied only to the recipe routes (`/app`, `/recipe/:id`) by importing `src/tokens-app.css` in `App.js`. All styles are scoped under `.app-shell` to avoid affecting the pixel-locked Sign In iframe.
+
+- Token import: `@import "/assets/common.css";`
+- Scope: `.app-shell { ... }`
+- Components and pages have been refactored to use tokenized colors, spacing, radii, shadows, and typography scale.
+
+To adjust the theme, update values in `assets/common.css` (for shared tokens) or adjust the semantic mappings inside `.app-shell` in `src/tokens-app.css` for the recipe UI.
+
 ## Environment Variables
 
 The app uses environment variables for future backend configuration. Copy `.env.example` to `.env` and adjust as needed.
@@ -53,14 +63,15 @@ The app uses environment variables for future backend configuration. Copy `.env.
 - `src/components/` – Reusable UI components
 - `src/pages/` – Route pages: Home and RecipeDetailPage
 - `src/App.js` – Routing and app shell
-- `src/App.css` – Theme and component styles
+- `src/tokens-app.css` – Scoped token-based styles for the recipe UI (imports `/assets/common.css`)
 - `assets/` – Static, generated Figma assets for the Sign In screen (HTML, CSS, JS, images)
 
 ## Design & Theme
 
-- Primary: `#2563EB`
-- Secondary: `#F59E0B`
+- Primary: Ocean Blue (`var(--color-1976d2)`)
+- Secondary: Amber (`var(--color-ff9c00)`)
 - Modern rounded corners, subtle shadows, and smooth focus rings
+- Backgrounds and gradients aligned to tokens; Ocean Professional theme mapping preserved
 
 ## Switching to a Real API (Future)
 

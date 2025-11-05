@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
+/* Import the tokenized, scoped stylesheet for recipe UI only. The Sign In route uses iframe and its own assets. */
+import './tokens-app.css';
 import { RecipesProvider } from './context/RecipesContext';
 import { UIProvider } from './context/UIContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -40,6 +41,8 @@ function App() {
 
   const AppShell = ({ children }) => (
     <>
+      {/* Inject shared tokens only for app routes */}
+      <link rel="stylesheet" href="/assets/common.css" />
       <header className="header">
         <div className="container header-inner">
           <Header />
