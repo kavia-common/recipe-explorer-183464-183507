@@ -1,82 +1,66 @@
-# Lightweight React Template for KAVIA
+# Recipe Explorer Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, responsive React app that lets users browse, search, and view detailed recipes. Styled using the Ocean Professional theme with blue and amber accents.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Responsive grid of recipe cards (2–4 columns based on viewport)
+- Real-time client-side search by title, ingredient, or tag
+- Detailed recipe page with image, time, servings, ingredients, and steps
+- Reusable components: Header, RecipeCard, RecipeGrid, RecipeDetail, Tag, Loading/Empty states
+- ErrorBoundary to catch render errors with a friendly message
+- Local mock data layer (no backend required) with seamless future API switch
+- Routing via react-router-dom for `/` and `/recipe/:id`
+- Ocean Professional theme using CSS variables and clean, modern UI
 
 ## Getting Started
 
-In the project directory, you can run:
+From this directory:
 
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```bash
+npm install
+npm start
 ```
 
-### Components
+Open http://localhost:3000 to view it in your browser.
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+## Environment Variables
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+The app uses environment variables for future backend configuration. Copy `.env.example` to `.env` and adjust as needed.
 
-## Learn More
+- `REACT_APP_API_BASE` – Base URL for backend API (not used yet; reserved for future integration)
+- Other optional variables are listed in `.env.example`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+- `src/data/mockRecipes.js` – Local mock data and helper functions
+- `src/context/RecipesContext.js` – Recipes state and search filtering (React Context)
+- `src/context/UIContext.js` – Theme and UI-level state (extensible)
+- `src/components/` – Reusable UI components
+- `src/pages/` – Route pages: Home and RecipeDetailPage
+- `src/App.js` – Routing and app shell
+- `src/App.css` – Theme and component styles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Design & Theme
 
-### Analyzing the Bundle Size
+- Primary: `#2563EB`
+- Secondary: `#F59E0B`
+- Modern rounded corners, subtle shadows, and smooth focus rings
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Switching to a Real API (Future)
 
-### Making a Progressive Web App
+Replace the mock loader in `RecipesContext` with a fetch call:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+const base = process.env.REACT_APP_API_BASE;
+const res = await fetch(`${base}/recipes`);
+const data = await res.json();
+setRecipes(data);
+```
 
-### Advanced Configuration
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `npm start` – Start dev server
+- `npm test` – Run tests
+- `npm run build` – Production build
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
