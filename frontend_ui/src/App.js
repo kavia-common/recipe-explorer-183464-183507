@@ -23,7 +23,17 @@ import RecipeDetailPage from './pages/RecipeDetailPage';
 function App() {
   // Helper renderers to isolate the pixel-locked sign-in without the app shell header.
   const SignInFrame = (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '1rem 0', minHeight: '100vh' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        padding: 0,
+        margin: 0,
+        minHeight: '100vh',
+        background: '#ffffff',
+      }}
+    >
       <iframe
         title="Sign In"
         src="/assets/sign-in-11-235.html"
@@ -33,7 +43,8 @@ function App() {
           border: 'none',
           borderRadius: 0,
           boxShadow: 'none',
-          background: 'transparent'
+          background: '#ffffff',
+          display: 'block',
         }}
       />
     </div>

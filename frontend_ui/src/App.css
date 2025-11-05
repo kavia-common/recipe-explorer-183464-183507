@@ -1,4 +1,5 @@
-/* Deprecated: Theme and component styles have been migrated to src/tokens-app.css,
-   which imports /assets/common.css and scopes all recipe UI under .app-shell to
-   avoid interference with the pixel-locked Sign In iframe. This file is kept to
-   avoid breaking imports but intentionally left minimal. */
+/* All visual styles live in src/tokens-app.css and are scoped under .app-shell.
+   This file intentionally contains no global element rules to avoid style bleed. */
+
+/* Optional future local overrides can be scoped here */
+/* .app-shell { } */

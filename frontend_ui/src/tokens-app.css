@@ -1,4 +1,5 @@
-/* Note: common tokens are injected via a <link href="/assets/common.css"> in App.js for the app shell routes. */
+/* All selectors are intentionally scoped under .app-shell to prevent bleed.
+   Note: shared tokens are injected only via <link href="/assets/common.css"> inside AppShell in App.js. No @import here. */
 
 /* Scope all recipe UI rules to .app-shell to avoid bleeding into the Sign In iframe route */
 .app-shell {
@@ -33,6 +34,19 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Explicit container sizing using tokens */
+.app-shell .container {
+  width: 100%;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
 }
 
 /* Reset/normalize within app shell only */

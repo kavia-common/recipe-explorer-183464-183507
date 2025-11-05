@@ -2,16 +2,16 @@
 
 html, body, #root { height: 100%; }
 
-body {
+html, body {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background: #ffffff;
 }
 
-/* Avoid adding global background/colors here to prevent bleeding into the Sign In iframe.
-   The recipe UI under /app is themed via .app-shell in tokens-app.css. */
-
+/* Keep global styles minimal to avoid bleeding into pixel-locked iframe. */
 a { color: inherit; }
 img { display: block; max-width: 100%; }
 button { font: inherit; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Do not set global font-family here. The app shell defines typography within its scope. */
